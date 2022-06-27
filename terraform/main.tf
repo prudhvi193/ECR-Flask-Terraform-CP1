@@ -366,7 +366,7 @@ resource "aws_ecs_task_definition" "ecs_task_defintion" {
             "name": "demo-app",
             "cpu": 10,
             "image": "${var.ecs_image_url}",
-            "essential": "true",
+            "essential": true,
             "memory": 300,
             "logConfiguration": {
                 "logDriver": "awslogs",
