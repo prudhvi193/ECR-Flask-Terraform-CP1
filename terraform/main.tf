@@ -104,8 +104,8 @@ resource "aws_iam_role" "ec2_role" {
 }
 
 resource "aws_iam_role" "autoscaling_role" {
-  name = "autoscaling_role"
-  path = "/"
+  name               = "autoscaling_role"
+  path               = "/"
   assume_role_policy = data.aws_iam_policy_document.autoscaling_pd.json
   inline_policy {
     name = "service-autoscaling"
