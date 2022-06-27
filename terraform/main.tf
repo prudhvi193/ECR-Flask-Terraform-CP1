@@ -6,7 +6,6 @@ resource "aws_iam_role" "ecs_service_role" {
   name               = "ecs_service_role"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.ecs_service_role_pd.json
-
   inline_policy {
     name = "ecs_service"
     policy = jsonencode({
@@ -34,7 +33,6 @@ resource "aws_iam_role" "ec2_role" {
   name               = "ec2_role"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.ec2_role_pd.json
-
   inline_policy {
     name = "ecs-service"
     policy = jsonencode({
@@ -106,8 +104,8 @@ resource "aws_iam_role" "ec2_role" {
 }
 
 resource "aws_iam_role" "autoscaling_role" {
-  name               = "autoscaling_role"
-  path               = "/"
+  name = "autoscaling_role"
+  path = "/"
   assume_role_policy = data.aws_iam_policy_document.autoscaling_pd.json
   inline_policy {
     name = "service-autoscaling"
@@ -460,7 +458,7 @@ resource "aws_ecs_service" "service" {
 # Create an EC2 Instance Profile
 resource "aws_iam_instance_profile" "ec2_instance_profile" {
   name = "ec2_instance_profile"
-  role = "aws_iam_role.ec2_role.name"
+  role = aws_iam_role.ec2_role.name
 }
 
 # Create an EC2 Launch Configuration for the ECS Cluster
