@@ -360,7 +360,7 @@ resource "aws_cloudwatch_log_group" "ecs_logs" {
 # Create an ECS task definition
 resource "aws_ecs_task_definition" "ecs_task_defintion" {
   family                = "${var.service_name}-ecs-demo-app"
-  container_definitions = <<DEFINITION
+  container_definitions = <<TASK_DEFINITION
     [
         {
             "name": "demo-app",
@@ -390,7 +390,7 @@ resource "aws_ecs_task_definition" "ecs_task_defintion" {
 
         }
     ]
-    DEFINITION
+    TASK_DEFINITION
   volume {
     name = "my-vol"
   }
