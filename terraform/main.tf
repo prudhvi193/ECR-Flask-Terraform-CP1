@@ -487,7 +487,7 @@ resource "aws_autoscaling_policy" "ecs_infra_scale_out_policy" {
   name                   = "ecs_infra_scale_out_policy"
   scaling_adjustment     = 1
   adjustment_type        = "ChangeInCapacity"
-  autoscaling_group_name = aws
+  autoscaling_group_name = aws_autoscaling_group.ecs_asg.name
 }
 
 # Create an application autoscaling target

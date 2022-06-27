@@ -20,10 +20,10 @@ data "aws_caller_identity" "current" {
 data "aws_iam_policy_document" "ec2_role_pd" {
   statement {
     actions = ["sts:AssumeRole"]
-  }
-  principals {
-    type        = "Service"
-    identifiers = ["ecs.amazonaws.com", "ec2.amazonaws.com", "dynamodb.amazonaws.com", "ecs-tasks.amazonaws.com"]
+    principals {
+      type        = "Service"
+      identifiers = ["ecs.amazonaws.com", "ec2.amazonaws.com", "dynamodb.amazonaws.com", "ecs-tasks.amazonaws.com"]
+    }
   }
 }
 
@@ -31,10 +31,10 @@ data "aws_iam_policy_document" "ec2_role_pd" {
 data "aws_iam_policy_document" "autoscaling_pd" {
   statement {
     actions = ["sts:AssumeRole"]
-  }
-  principals {
-    type        = "Service"
-    identifiers = ["application-autoscaling.amazonaws.com"]
+    principals {
+      type        = "Service"
+      identifiers = ["application-autoscaling.amazonaws.com"]
+    }
   }
 }
 
