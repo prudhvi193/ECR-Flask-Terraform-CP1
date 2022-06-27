@@ -574,7 +574,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_infra_cpu_alarm_high" {
     "Name"  = "AutoScalingGroupName"
     "Value" = aws_autoscaling_group.ecs_asg.name
   }
-  alarm_actions = [aws_autoscaling_group.ecs_infra_scale_out_policy.arn]
+  alarm_actions = [aws_autoscaling_policy.ecs_infra_scale_out_policy.arn]
 }
 
 # Create a DynamoDB Table
