@@ -37,7 +37,8 @@ def create_batsman():
     resp = client.put_item(
         TableName = dynamoTableName,
         Item = {
-            'artist'
+            'batsman': {'S': batsman },
+            'highest_score': {'S': highest_score}
         }
     )
     return jsonify{(
