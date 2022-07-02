@@ -6,8 +6,10 @@ resource "aws_iam_role" "ecs_service_role" {
   name               = "ecs_service_role"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.ecs_service_role_pd.json
+
   inline_policy {
     name = "ecs_service"
+
     policy = jsonencode({
       Version = "2022-06-26"
       Statement = [
@@ -33,8 +35,11 @@ resource "aws_iam_role" "ec2_role" {
   name               = "ec2_role"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.ec2_role_pd.json
+  managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"]
+
   inline_policy {
     name = "ecs-service"
+
     policy = jsonencode({
       Version = "2022-06-26"
       Statement = [
@@ -59,6 +64,7 @@ resource "aws_iam_role" "ec2_role" {
 
   inline_policy {
     name = "dynamo-access"
+
     policy = jsonencode({
       Version = "2022-06-26"
       Statement = [
@@ -85,6 +91,7 @@ resource "aws_iam_role" "ec2_role" {
 
   inline_policy {
     name = "ecr-access"
+
     policy = jsonencode({
       Version = "2022-06-26"
       Statement = [
@@ -107,8 +114,10 @@ resource "aws_iam_role" "autoscaling_role" {
   name               = "autoscaling_role"
   path               = "/"
   assume_role_policy = data.aws_iam_policy_document.autoscaling_pd.json
+
   inline_policy {
     name = "service-autoscaling"
+    
     policy = jsonencode({
       Version = "2022-06-26"
       Statement = [
