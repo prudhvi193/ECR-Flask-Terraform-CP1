@@ -4,7 +4,7 @@ import boto3
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-client = boto3.client('dynamodb', region_name='us-east-1')
+client = boto3.client('dynamodb', region_name='us-east-2')
 dynamoTableName = 'cricketersTable'
 
 @app.route("/")
