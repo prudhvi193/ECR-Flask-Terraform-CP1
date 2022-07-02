@@ -8,10 +8,10 @@ resource "aws_iam_role" "ecs_service_role" {
   assume_role_policy = data.aws_iam_policy_document.ecs_service_role_pd.json
 
   inline_policy {
-    name = "ecs_service"
+    name = "ecs-service"
 
     policy = jsonencode({
-      Version = "2022-06-26"
+      Version = "2022-07-02"
       Statement = [
         {
           Action = [
@@ -32,27 +32,27 @@ resource "aws_iam_role" "ecs_service_role" {
 }
 
 resource "aws_iam_role" "ec2_role" {
-  name               = "ec2_role"
-  path               = "/"
-  assume_role_policy = data.aws_iam_policy_document.ec2_role_pd.json
+  name                = "ec2_role"
+  path                = "/"
+  assume_role_policy  = data.aws_iam_policy_document.ec2_role_pd.json
   managed_policy_arns = ["arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM"]
 
   inline_policy {
     name = "ecs-service"
 
     policy = jsonencode({
-      Version = "2022-06-26"
+      Version = "2022-07-02"
       Statement = [
         {
           Action = [
             "ec2:DescribeTags",
             "ecs:CreateCluster",
-            "ecs:DeregisterContainerService",
-            "ecs:DiscoverPollEndPoint",
+            "ecs:DeregisterContainerInstance",
+            "ecs:DiscoverPollEndpoint",
             "ecs:Poll",
             "ecs:RegisterContainerInstance",
             "ecs:StartTelemetrySession",
-            "ecs:UpdateContainerInstanceState",
+            "ecs:UpdateContainerInstancesState",
             "ecs:Submit*"
           ]
           Effect   = "Allow"
@@ -66,7 +66,7 @@ resource "aws_iam_role" "ec2_role" {
     name = "dynamo-access"
 
     policy = jsonencode({
-      Version = "2022-06-26"
+      Version = "2022-07-02"
       Statement = [
         {
           Action = [
@@ -79,7 +79,7 @@ resource "aws_iam_role" "ec2_role" {
             "dynamodb:UpdateItem",
             "dynamodb:DeleteItem"
           ]
-          Effect = "Allow"
+          Effect   = "Allow"
           Resource = [
             "arn:aws:logs:us-east-1:${local.account_id}:*/*",
             "arn:aws:dynamodb:us-east-1:${local.account_id}:*/*"
@@ -93,12 +93,12 @@ resource "aws_iam_role" "ec2_role" {
     name = "ecr-access"
 
     policy = jsonencode({
-      Version = "2022-06-26"
+      Version = "2022-07-02"
       Statement = [
         {
           Action = [
             "ecr:BatchCheckLayerAvailability",
-            "ecr:BatchGetItem",
+            "ecr:BatchGetImage",
             "ecr:GetDownloadUrlForLayer",
             "ecr:GetAuthorizationToken"
           ]
@@ -117,9 +117,9 @@ resource "aws_iam_role" "autoscaling_role" {
 
   inline_policy {
     name = "service-autoscaling"
-    
+
     policy = jsonencode({
-      Version = "2022-06-26"
+      Version = "2022-07-02"
       Statement = [
         {
           Action = [
@@ -129,7 +129,7 @@ resource "aws_iam_role" "autoscaling_role" {
             "cloudwatch:DescribeAlarms",
             "cloudwatch:DeleteAlarms"
           ]
-          Effect = "Allow"
+          Effect   = "Allow"
           Resource = [
             "arn:aws:ecs:us-east-1:${local.account_id}:*/*",
             "arn:aws:cloudwatch:us-east-1:${local.account_id}:*/*"
