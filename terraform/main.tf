@@ -325,7 +325,7 @@ resource "aws_network_acl_rule" "private_egress" {
 
 # Create a security group for the ALB
 resource "aws_security_group" "ecs_sg" {
-  name        = "ecs-sg"
+  name        = "ecs-sg1"
   description = "ECS Security Group for the ALB"
   vpc_id      = aws_vpc.main.id
 
