@@ -11,7 +11,7 @@ resource "aws_iam_role" "ecs_service_role" {
     name = "ecs-service"
 
     policy = jsonencode({
-      Version = "2022-07-02"
+      Version = "2012-10-17"
       Statement = [
         {
           Action = [
@@ -41,7 +41,7 @@ resource "aws_iam_role" "ec2_role" {
     name = "ecs-service"
 
     policy = jsonencode({
-      Version = "2022-07-02"
+      Version = "2012-10-17"
       Statement = [
         {
           Action = [
@@ -66,7 +66,7 @@ resource "aws_iam_role" "ec2_role" {
     name = "dynamo-access"
 
     policy = jsonencode({
-      Version = "2022-07-02"
+      Version = "2012-10-17"
       Statement = [
         {
           Action = [
@@ -79,7 +79,7 @@ resource "aws_iam_role" "ec2_role" {
             "dynamodb:UpdateItem",
             "dynamodb:DeleteItem"
           ]
-          Effect   = "Allow"
+          Effect = "Allow"
           Resource = [
             "arn:aws:logs:us-east-2:${local.account_id}:*/*",
             "arn:aws:dynamodb:us-east-2:${local.account_id}:*/*"
@@ -93,7 +93,7 @@ resource "aws_iam_role" "ec2_role" {
     name = "ecr-access"
 
     policy = jsonencode({
-      Version = "2022-07-02"
+      Version = "2012-10-17"
       Statement = [
         {
           Action = [
@@ -119,7 +119,7 @@ resource "aws_iam_role" "autoscaling_role" {
     name = "service-autoscaling"
 
     policy = jsonencode({
-      Version = "2022-07-02"
+      Version = "2012-10-17"
       Statement = [
         {
           Action = [
@@ -129,7 +129,7 @@ resource "aws_iam_role" "autoscaling_role" {
             "cloudwatch:DescribeAlarms",
             "cloudwatch:DeleteAlarms"
           ]
-          Effect   = "Allow"
+          Effect = "Allow"
           Resource = [
             "arn:aws:ecs:us-east-2:${local.account_id}:*/*",
             "arn:aws:cloudwatch:us-east-2:${local.account_id}:*/*"
