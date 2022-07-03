@@ -475,7 +475,7 @@ resource "aws_launch_configuration" "ecs_launch_config" {
   image_id             = data.aws_ami.latest_ecs_ami.image_id
   security_groups      = [aws_security_group.ecs_sg.id]
   instance_type        = var.instance_type
-  iam_instance_profile = aws_iam_instance_profile1.name
+  iam_instance_profile = aws_iam_instance_profile.ec2_instance_profile1.name
   user_data            = "#!/bin/bash\necho ECS_Cluster=ecs_cluster >> /etc/ecs/ecs.config"
 }
 
