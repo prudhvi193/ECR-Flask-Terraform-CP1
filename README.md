@@ -1,1 +1,1 @@
-# ECR-Flask-Terraform-CP1
+# Deploying a flask microservice for Cricbuzz application to AWS using Terraform
